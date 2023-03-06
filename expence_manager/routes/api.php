@@ -8,6 +8,7 @@ use App\Http\Controllers\ModulePermissionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\Api;
@@ -82,4 +83,21 @@ Route::controller(ModulePermissionController::class)->prefix('module-permission'
     Route::get('show/{id}', 'get');
     Route::put('update/{id}', 'update');
     Route::delete('delete/{id}', 'delete');
+});
+
+
+Route::controller(ModuleController::class)->prefix('module')->group(function () {
+    Route::get('/list', 'list');
+    Route::post('/create','create');
+    Route::patch('/update/{data}','update');
+    Route::post('delete/{code}', 'delete');
+    Route::get('get/{id}', 'get');
+});
+
+Route::controller(RoleController::class)->prefix('role')->group(function () {
+    Route::get('/list', 'list');
+    Route::post('/create','create');
+    Route::patch('/update/{data}','update');
+    Route::delete('delete/{id}', 'delete');
+    Route::get('get/{id}', 'get');
 });
