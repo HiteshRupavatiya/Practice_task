@@ -65,10 +65,6 @@ Route::controller(AuthController::class)->prefix('user')->group(function () {
     Route::post('resetPassword', 'resetPassword');
 });
 
-Route::controller(ModuleController::class)->group(function () {
-    Route::get('/list', 'list');
-});
-
 Route::controller(PermissionController::class)->prefix('permission')->group(function () {
     Route::post('create', 'create');
     Route::get('list', 'list');
