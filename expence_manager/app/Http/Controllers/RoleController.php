@@ -87,7 +87,6 @@ class RoleController extends Controller
         }
         return $this->success('Role Detatils',$role);
     }
-
 }
 
 

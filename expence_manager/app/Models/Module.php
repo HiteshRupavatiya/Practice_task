@@ -18,8 +18,5 @@ class Module extends Model
         'name'
     ];
 
-    // public function permissions()
-    // {
-    //     return $this->belongsToMany(Permission::class,'module_permissions');
-    // }
+   
 }

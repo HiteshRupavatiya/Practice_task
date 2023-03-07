@@ -43,7 +43,7 @@ class ModuleController extends Controller
     }   
 
     //update Module
-    public function update(Request $request, $code){
+    public function update(Request $request,$code){
 
         $validatedata = Validator::make($request->all(), [
             'code'              => 'alpha_dash|min:2|max:20|unique:modules,code',
@@ -87,7 +87,6 @@ class ModuleController extends Controller
         }
         return $this->success('Module Details',$module);
     }
-
 
 }
 
