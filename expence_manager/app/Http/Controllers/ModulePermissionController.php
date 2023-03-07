@@ -31,13 +31,13 @@ class ModulePermissionController extends Controller
             'view_access'   => 'required|boolean|numeric|max:1',
             'delete_access' => 'required|boolean|numeric|max:1',
             'module_code'   => 'required|alpha_dash|exists:modules,code',
-            'permission_id' => 'required|numeric|exists:permissions,id|unique:'
+            'permission_id' => 'required|numeric|exists:permissions,id'
         ]);
-
+        
         if ($validate_module_permission->fails()) {
             return $this->ErrorResponse($validate_module_permission);
         }
-
+       
         $module_permission = ModulePermission::create($request->only(
             'add_access',
             'edit_access',

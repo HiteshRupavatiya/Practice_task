@@ -24,7 +24,7 @@ class PermissionController extends Controller
     public function create(Request $request)
     {
         $validatePermission = Validator::make($request->all(), [
-            'permission_name' => 'required|alpha|min:4|max:20|unique:permissions,permission_name'
+            'permission_name' => 'required|alpha_dash|min:4|max:20|unique:permissions,permission_name'
         ]);
 
         if ($validatePermission->fails()) {

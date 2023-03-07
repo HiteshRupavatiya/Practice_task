@@ -18,8 +18,8 @@ class ModulePermission extends Model
         'permission_id',
     ];
 
-    public function permission()
+    public function module()
     {
-        return $this->belongsTo(Permission::class);
+        return $this->belongsTo(Module::class);
     }
 }

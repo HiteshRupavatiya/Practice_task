@@ -18,5 +18,8 @@ class Module extends Model
         'name'
     ];
 
+    public function permissions(){
+        return $this->hasMany(ModulePermission::class);
+    }
    
 }

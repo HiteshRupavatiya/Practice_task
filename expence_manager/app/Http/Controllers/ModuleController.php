@@ -81,7 +81,7 @@ class ModuleController extends Controller
 
     //Get Module
     public function get($code){
-        $module = Module::find($code);
+        $module = Module::with('permissions')->find($code);
         if (is_null($module)) {
             return $this->DataNotFound();
         }
