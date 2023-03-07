@@ -25,11 +25,11 @@ class ModuleController extends Controller
     //create Module
     public function create(Request $request){
         $validatedata = Validator::make($request->all(), [
-            'code'              => 'required|unique:modules,code|alpha_dash|max:70',
-            'name'          => 'required|alpha|max:50|unique:modules,name',
+            'code'              => 'required|unique:modules,code|alpha_dash',
+            'name'          => 'required|string|max:70|unique:modules,name',
         ],
         [
-            'unique' => 'The :attribute already in modules table please unique enter unique code : :values',
+            'unique' => 'The :attribute already in modules table please unique enter unique code values',
         ]
         );
 
@@ -40,17 +40,14 @@ class ModuleController extends Controller
         $module = Module::create($request->only('code','name'));
 
         return $this->success('create Module Successfully',$module);
-    }
+    }   
 
     //update Module
     public function update(Request $request, Module $data){
 
         $validatedata = Validator::make($request->all(), [
-            'code'              => 'required|unique:modules,code|alpha_dash|max:70',
-            'name'          => 'required|alpha|max:50|unique:modules,name',
-        ],
-        [
-            'unique' => 'The :attribute already exists in modules table please enter unique code : :values',
+            'code'              => 'required|alpha_dash|max:70',
+            'name'              => 'required|string|max:50',
         ]
         );
         
@@ -58,10 +55,10 @@ class ModuleController extends Controller
             return $this->ErrorResponse($validatedata);
         }
 
+        $data->delete();
+        $module = Module::create($request->only('code','name'));
         
-        $data->update($request->only('code','name'));
-        
-        return $this->success('Modules updated Successfully',$data);
+        return $this->success('Modules updated Successfully',$module);
     
     }
 

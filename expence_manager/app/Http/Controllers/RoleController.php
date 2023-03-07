@@ -25,8 +25,8 @@ class RoleController extends Controller
     //create Role
     public function create(Request $request){
         $validatedata = Validator::make($request->all(), [
-            'role_name'              => 'required|unique:roles,role_name|max:70|alpha',
-            'description'          => 'required|alpha_dash|max:350',
+            'role_name'              => 'required|unique:roles,role_name|max:70|string',
+            'description'          => 'required|string|max:350',
         ],
         [
             'unique' => 'This :attribute already in Role table please enter unique role',
@@ -43,11 +43,8 @@ class RoleController extends Controller
     public function update(Request $request, Role $data){
    
         $validatedata = Validator::make($request->all(), [
-            'role_name'              => 'required|alpha|max:70',
-            'description'          => 'required|alpha_dash|max:350',
-        ],
-        [
-            'unique' => 'This :attribute already in Role table please enter unique role ',
+            'role_name'              => 'required|string|max:70',
+            'description'          => 'required|string|max:350',
         ]
     );
         
