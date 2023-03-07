@@ -27,11 +27,6 @@ trait ResponseMessage{
         ]);
     }
 
-    public function deleteMessage($message){
-        return response()->json([
-            'status'        => 200,
-            'success'       => $message
-        ]);
-    }
+    
 }
 ?>
