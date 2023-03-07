@@ -44,22 +44,27 @@ class RoleController extends Controller
 
     //update Role
 
-    public function update(Request $request, Role $data){
-   
+    public function update(Request $request, $id){
+        
         $validatedata = Validator::make($request->all(), [
             'role_name'              => 'string|max:70|unique:roles,role_name',
             'description'          => 'required|string|max:350',
         ]
     );
         
+       
         if($validatedata->fails()){
             return $this->ErrorResponse($validatedata);
         }
-
-        //$data->delete();
-        $data->update($request->only('role_name','description'));
         
+        $data = Role::find($id);
+        if($data){
+        $data->update($request->only('role_name','description'));
         return $this->success('Role updated Successfully',$data);
+        }
+        else{
+            return $this->DataNotFound();
+        }
     }
 
     //delete role

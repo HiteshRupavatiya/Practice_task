@@ -85,7 +85,7 @@ Route::controller(ModulePermissionController::class)->prefix('module-permission'
 Route::controller(ModuleController::class)->prefix('module')->group(function () {
     Route::get('/list', 'list');
     Route::post('/create','create');
-    Route::patch('/update/{data}','update');
+    Route::patch('/update/{code}','update');
     Route::post('delete/{code}', 'delete');
     Route::get('get/{id}', 'get');
 });
@@ -93,7 +93,7 @@ Route::controller(ModuleController::class)->prefix('module')->group(function () 
 Route::controller(RoleController::class)->prefix('role')->group(function () {
     Route::get('/list', 'list');
     Route::post('/create','create');
-    Route::patch('/update/{data}','update');
+    Route::patch('/update/{id}','update');
     Route::delete('delete/{id}', 'delete');
     Route::get('get/{id}', 'get');
 });

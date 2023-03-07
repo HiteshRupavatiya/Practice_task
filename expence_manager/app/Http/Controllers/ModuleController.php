@@ -10,7 +10,7 @@ class ModuleController extends Controller
 {
     use ResponseMessage;
 
-    //List Modules
+    //List Module
     public function list(){
         $modules = Module::all();
 
@@ -43,7 +43,7 @@ class ModuleController extends Controller
     }   
 
     //update Module
-    public function update(Request $request, Module $data){
+    public function update(Request $request, $code){
 
         $validatedata = Validator::make($request->all(), [
             'code'              => 'alpha_dash|min:2|max:20|unique:modules,code',
@@ -57,10 +57,14 @@ class ModuleController extends Controller
         if($validatedata->fails()){
             return $this->ErrorResponse($validatedata);
         }
-        $data->update($request->only('code','name'));
-        
-        return $this->success('Modules updated Successfully',$data);
-    
+        $data = Module::find($code);
+        if($data){
+            $data->update($request->only('code','name'));
+            return $this->success('Modules updated Successfully',$data);
+        }
+        else{
+            return $this->DataNotFound();
+        }
     }
 
     //Delete Module
