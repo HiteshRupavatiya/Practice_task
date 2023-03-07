@@ -17,4 +17,9 @@ class ModulePermission extends Model
         'module_code',
         'permission_id',
     ];
+
+    public function permission()
+    {
+        return $this->belongsTo(Permission::class);
+    }
 }

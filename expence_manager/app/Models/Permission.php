@@ -12,4 +12,14 @@ class Permission extends Model
     protected $fillable = [
         'permission_name',
     ];
+
+    public function modulePermissions()
+    {
+        return $this->hasMany(ModulePermission::class);
+    }
+
+    public function modules()
+    {
+        return $this->hasOneThrough(ModulePermission::class, Module::class);
+    }
 }
