@@ -26,7 +26,7 @@ class ModulePermissionController extends Controller
     public function create(Request $request)
     {
         $validate_module_permission = Validator::make($request->all(), [
-            'module_code'   => 'required|alpha_dash|exists:modules,code|unique:module_permissions,module_code',
+            'module_code'   => 'required|alpha_dash|exists:modules,code',
             'permission_id' => 'required|numeric|exists:permissions,id|unique:module_permissions,permission_id'
         ]);
 
