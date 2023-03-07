@@ -25,11 +25,11 @@ class ModuleController extends Controller
     //create Module
     public function create(Request $request){
         $validatedata = Validator::make($request->all(), [
-            'code'              => 'required|unique:modules,code|alpha_dash',
+            'code'              => 'required|unique:modules,code|alpha_dash|min:2|max:20',
             'name'          => 'required|string|max:70|unique:modules,name',
         ],
         [
-            'unique' => 'The :attribute already in modules table please unique enter unique code values',
+            'unique' => 'this :attribute already in modules table please  enter unique code values',
         ]
         );
 
@@ -46,17 +46,17 @@ class ModuleController extends Controller
     public function update(Request $request, Module $data){
 
         $validatedata = Validator::make($request->all(), [
-            'code'              => 'alpha_dash|max:70|unique:modules,code',
-            'name'              => 'string|max:50|unique:modules,name',
+            'code'              => 'alpha_dash|min:2|max:20|unique:modules,code',
+            'name'              => 'string|max:70|unique:modules,name',
         ],
-
+        [
+            'unique'    => 'this :attribute already in modules table please  enter unique code values',
+        ]
         );
         
         if($validatedata->fails()){
             return $this->ErrorResponse($validatedata);
         }
-
-        //$data->delete();
         $data->update($request->only('code','name'));
         
         return $this->success('Modules updated Successfully',$data);
