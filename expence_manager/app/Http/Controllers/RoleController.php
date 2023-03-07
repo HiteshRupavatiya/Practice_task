@@ -30,8 +30,12 @@ class RoleController extends Controller
         ],
         [
             'unique' => 'This :attribute already in Role table please enter unique role',
-        ]
+        ]    
         );
+
+        if($validatedata->fails()){
+            return $this->ErrorResponse($validatedata);
+        }
         
         $role = Role::create($request->only('role_name','description'));
 
@@ -43,7 +47,7 @@ class RoleController extends Controller
     public function update(Request $request, Role $data){
    
         $validatedata = Validator::make($request->all(), [
-            'role_name'              => 'required|string|max:70',
+            'role_name'              => 'string|max:70|unique:roles,role_name',
             'description'          => 'required|string|max:350',
         ]
     );
@@ -52,10 +56,10 @@ class RoleController extends Controller
             return $this->ErrorResponse($validatedata);
         }
 
-        $data->delete();
-        $updaetedata = $data->create($request->only('role_name','description'));
+        //$data->delete();
+        $data->update($request->only('role_name','description'));
         
-        return $this->success('Role updated Successfully',$updaetedata);
+        return $this->success('Role updated Successfully',$data);
     }
 
     //delete role

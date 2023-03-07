@@ -46,19 +46,20 @@ class ModuleController extends Controller
     public function update(Request $request, Module $data){
 
         $validatedata = Validator::make($request->all(), [
-            'code'              => 'required|alpha_dash|max:70',
-            'name'              => 'required|string|max:50',
-        ]
+            'code'              => 'alpha_dash|max:70|unique:modules,code',
+            'name'              => 'string|max:50|unique:modules,name',
+        ],
+
         );
         
         if($validatedata->fails()){
             return $this->ErrorResponse($validatedata);
         }
 
-        $data->delete();
-        $module = Module::create($request->only('code','name'));
+        //$data->delete();
+        $data->update($request->only('code','name'));
         
-        return $this->success('Modules updated Successfully',$module);
+        return $this->success('Modules updated Successfully',$data);
     
     }
 
