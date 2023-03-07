@@ -24,7 +24,7 @@ class PermissionController extends Controller
     public function create(Request $request)
     {
         $validatePermission = Validator::make($request->all(), [
-            'permission_name' => 'required|alpha|min:4|max:20|unique:permissions'
+            'permission_name' => 'required|alpha|min:4|max:20|unique:permissions,permission_name'
         ]);
 
         if ($validatePermission->fails()) {
@@ -39,7 +39,7 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $validatePermission = Validator::make($request->all(), [
-            'permission_name' => 'required|alpha|min:4|max:20|unique:permissions'
+            'permission_name' => 'required|alpha|min:4|max:20|unique:permissions,permission_name'
         ]);
 
         if ($validatePermission->fails()) {
