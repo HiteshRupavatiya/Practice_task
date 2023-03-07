@@ -107,6 +107,7 @@ class ModulePermissionController extends Controller
     public function get($id)
     {
         $module_permission = ModulePermission::find($id);
+        $module_permission->permission;
         if ($module_permission) {
             return $this->success('Module Permission Fetched Successfuly', $module_permission);
         }
