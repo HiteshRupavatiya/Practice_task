@@ -22,4 +22,8 @@ class ModulePermission extends Model
     {
         return $this->belongsTo(Module::class);
     }
+
+    public function permission(){
+        return $this->belongsTo(Permission::class);
+    }
 }
