@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountUsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ModulePermissionController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -96,4 +97,12 @@ Route::controller(RoleController::class)->prefix('role')->group(function () {
     Route::patch('/update/{id}','update');
     Route::delete('delete/{id}', 'delete');
     Route::get('get/{id}', 'get');
+});
+
+Route::controller(RolePermissionController::class)->prefix('role-permission')->group(function () {
+    Route::post('/create','create');
+    Route::get('/list', 'list');
+    // Route::patch('/update/{id}','update');
+    // Route::delete('delete/{id}', 'delete');
+    // Route::get('get/{id}', 'get');
 });

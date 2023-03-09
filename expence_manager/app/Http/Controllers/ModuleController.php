@@ -12,7 +12,7 @@ class ModuleController extends Controller
 
     //List Module
     public function list(){
-        $modules = Module::all();
+        $modules = Module::where('is_active','1')->withTrashed()->get();
 
         if(count($modules) > 0){
             return $this->success('List Modules',$modules);
@@ -48,6 +48,7 @@ class ModuleController extends Controller
         $validatedata = Validator::make($request->all(), [
             'code'              => 'alpha_dash|min:2|max:20|unique:modules,code',
             'name'              => 'string|max:70|unique:modules,name',
+            'is_active'         => 'boolean|numeric|min:0|max:1'
         ],
         [
             'unique'    => 'this :attribute already in modules table please  enter unique code values',
@@ -59,7 +60,7 @@ class ModuleController extends Controller
         }
         $data = Module::find($code);
         if($data){
-            $data->update($request->only('code','name'));
+            $data->update($request->only('code','name','is_active'));
             return $this->success('Modules updated Successfully',$data);
         }
         else{
