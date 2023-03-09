@@ -12,9 +12,9 @@ class RoleController extends Controller
 
     //List Role
     public function list(){
-        $roles = Role::all();
+        $roles = Role::where('is_active','1')->get();
 
-        if(count($roles) > 0){
+        if($roles){
             return $this->success('List Roles',$roles);
         }
         else {
@@ -43,12 +43,15 @@ class RoleController extends Controller
     }
 
     //update Role
-
     public function update(Request $request, $id){
         
         $validatedata = Validator::make($request->all(), [
             'role_name'              => 'string|max:70|unique:roles,role_name',
-            'description'          => 'required|string|max:350',
+            'description'            => 'required|string|max:350',
+            'is_active'              => 'boolean|numeric'
+        ],
+        [
+            'boolean'                => 'this field access only 1(active) or 0(deactive)'
         ]
     );
         

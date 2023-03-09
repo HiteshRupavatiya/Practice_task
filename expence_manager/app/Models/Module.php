@@ -21,6 +21,11 @@ class Module extends Model
         'is_active'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function permissions(){
         return $this->hasMany(ModulePermission::class);
     }

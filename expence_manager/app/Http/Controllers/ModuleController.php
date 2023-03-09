@@ -52,6 +52,7 @@ class ModuleController extends Controller
         ],
         [
             'unique'    => 'this :attribute already in modules table please  enter unique code values',
+            'boolean'   => 'this field access only 1(active) or 0(deactive)'
         ]
         );
         
@@ -81,8 +82,9 @@ class ModuleController extends Controller
     }
 
     //Get Module
-    public function get($code){
-        $module = Module::with('permissions')->find($code);
+    public function get($id){
+        $module = Module::with('permissions')->find($id);
+
         if (is_null($module)) {
             return $this->DataNotFound();
         }

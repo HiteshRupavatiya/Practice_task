@@ -102,7 +102,7 @@ Route::controller(RoleController::class)->prefix('role')->group(function () {
 Route::controller(RolePermissionController::class)->prefix('role-permission')->group(function () {
     Route::post('/create','create');
     Route::get('/list', 'list');
-    // Route::patch('/update/{id}','update');
-    // Route::delete('delete/{id}', 'delete');
-    // Route::get('get/{id}', 'get');
+    Route::patch('/update/{id}','update');
+    Route::delete('delete/{id}', 'delete');
+    Route::get('get/{id}', 'get');
 });

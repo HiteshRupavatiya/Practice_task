@@ -17,4 +17,6 @@ class Permission extends Model
     {
         return $this->hasMany(ModulePermission::class);
     }
+
+
 }
