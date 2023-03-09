@@ -12,7 +12,7 @@ class ModuleController extends Controller
 
     //List Module
     public function list(){
-        $modules = Module::where('is_active','1')->withTrashed()->get();
+        $modules = Module::where('is_active',true)->withTrashed()->get();
 
         if(count($modules) > 0){
             return $this->success('List Modules',$modules);
@@ -48,7 +48,7 @@ class ModuleController extends Controller
         $validatedata = Validator::make($request->all(), [
             'code'              => 'alpha_dash|min:2|max:20|unique:modules,code',
             'name'              => 'string|max:70|unique:modules,name',
-            'is_active'         => 'boolean|numeric|min:0|max:1'
+            'is_active'         => 'boolean'
         ],
         [
             'unique'    => 'this :attribute already in modules table please  enter unique code values',
@@ -59,7 +59,7 @@ class ModuleController extends Controller
         if($validatedata->fails()){
             return $this->ErrorResponse($validatedata);
         }
-        $data = Module::find($code);
+        $data = Module::findOrFail($code);
         if($data){
             $data->update($request->only('code','name','is_active'));
             return $this->success('Modules updated Successfully',$data);
@@ -71,7 +71,7 @@ class ModuleController extends Controller
 
     //Delete Module
     public function delete($code){
-        $module = Module::find($code);
+        $module = Module::findOrFail($code);
         if(is_null($module)){
             return $this->DataNotFound();
         }
