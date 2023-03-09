@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Traits\ResponseMessage;
@@ -13,7 +14,7 @@ class PermissionController extends Controller
 
     public function list()
     {
-        $permissions = Permission::all();
+        $permissions = Module::with('permissions')->get();
         if (count($permissions) > 0) {
             return $this->success('Permissions Fetched Successfuly', $permissions);
         } else {
@@ -59,7 +60,6 @@ class PermissionController extends Controller
     public function get($id)
     {
         $permission = Permission::find($id);
-        $permission->modulePermissions;
         if ($permission) {
             return $this->success('Permission Fetched Successfuly', $permission);
         }
