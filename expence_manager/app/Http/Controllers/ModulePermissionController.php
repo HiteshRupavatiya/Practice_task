@@ -15,7 +15,7 @@ class ModulePermissionController extends Controller
 
     public function list()
     {
-        $module_permissions = ModulePermission::all();
+        $module_permissions = ModulePermission::with('module', 'permission')->get();
         if (count($module_permissions)) {
             return $this->success('Module Permissions Fetched Successfuly', $module_permissions);
         } else {
@@ -80,7 +80,6 @@ class ModulePermissionController extends Controller
     public function get($id)
     {
         $module_permission = ModulePermission::find($id);
-        $module_permission->permission;
         if ($module_permission) {
             return $this->success('Module Permission Fetched Successfuly', $module_permission);
         }
